@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      nav {
+        display: flex;
+        border: 1px solid black;
+        justify-content: right;
+        gap: 50px;
+      }
+
+      nav div:last-child {
+        margin-right: 50px;
+      }
+
+      nav a {
+        display: block;
+        text-decoration: none;
+        color: black;
+        padding: 10px;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      .slider img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      .moviesDiv {
+        display: grid;
+        margin-top: 30px;
+        grid-template-columns: auto auto auto;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div><a href="home.html">Home</a></div>
+      <div><a href="login.html">Login</a></div>
+      <div><a href="signup.html">SignUp</a></div>
+    </nav>
+
+    <div class="sort">
+      <button onclick="showHigh()">Sort By High Ratings to Low</button>
+      <button onclick="showLow()">Sort By Low Ratings to High</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  let sliderDiv = document.createElement("div");
+  sliderDiv.className = "slider";
+  let body = document.querySelector("body");
+
+  function Movie(name, releaseDate, poster, rating) {
+    this.name = name;
+    this.releaseDate = releaseDate;
+    this.poster = poster;
+    this.rating = rating;
+  }
+
+  var movie1 = new Movie(
+    "Free Guy",
+    "13 Aug 2021",
+    "https://lumiere-a.akamaihd.net/v1/images/p_20cs_freeguy_homeent_21930_49e74453.jpeg",
+    7.2
+  );
+
+  var movie2 = new Movie(
+    "the green knight",
+    "30 July 2021",
+    "https://images-na.ssl-images-amazon.com/images/I/81akADKWVYS.jpg",
+    6.5
+  );
+
+  var movie3 = new Movie(
+    "Sooryavanshi",
+    "05 Nov 2021",
+    "https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Sooryavanshi_film_poster.jpg/220px-Sooryavanshi_film_poster.jpg",
+    6.5
+  );
+
+  var movie4 = new Movie(
+    "Shang-Chi and the Legend of the Ten Rings",
+    "03 Sep 2021",
+    "https://www.cnet.com/a/img/jIocYxpwSMise2-OhuW3vpHoG-o=/940x0/2021/04/19/111f2cf0-1f0e-4884-8733-a4809195773c/shang-chi-poster-marvel.jpg",
+    7.6
+  );
+
+  var movie5 = new Movie(
+    "Eternals",
+    "05 Nov 2021",
+    "https://terrigen-cdn-dev.marvel.com/content/prod/1x/online_10.jpg",
+    6.8
+  );
+
+  var movie6 = new Movie(
+    "Red Notice",
+    "12 Nov 2021",
+    "https://www.vitalthrills.com/wp-content/uploads/2021/10/red-notice-trailer.jpg",
+    6.4
+  );
+
+  var movie7 = new Movie(
+    "Spider-Man: No Way Home",
+    "17 Dec 2021",
+    "https://terrigen-cdn-dev.marvel.com/content/prod/1x/snh_online_6072x9000_posed_01.jpg",
+    8.6
+  );
+
+  var movie8 = new Movie(
+    "Dune",
+    "22 Oct 2021",
+    "https://i.gadgets360cdn.com/large/dune_movie_review_timothee_chalamet_rebecca_ferguson_1634824785794.jpg",
+    8.2
+  );
+
+  var movie9 = new Movie(
+    "No Time to Die",
+    "22 Oct 2021",
+    "https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/rNwQOSYuypuTcTCitFL8kgTINkc=/800x0/filters:format(jpg):quality(70)/cloudfront-eu-central-1.images.arcpublishing.com/thenational/ZYGJQFLOK744NJBWWKEWJ3ZX6Q.jpg",
+    7.4
+  );
+
+  let movies = [];
+  movies.push(movie1);
+  movies.push(movie2);
+  movies.push(movie3);
+  movies.push(movie4);
+  movies.push(movie5);
+  movies.push(movie6);
+  movies.push(movie7);
+  movies.push(movie8);
+  movies.push(movie9);
+
+  let i = 0;
+
+  setInterval(function () {
+    sliderDiv.innerHTML = null;
+
+    if (i == movies.length) {
+      i = 0;
+    }
+
+    let img = document.createElement("img");
+    img.setAttribute("src", movies[i].poster);
+    img.width = 300;
+    img.height = 400;
+
+    sliderDiv.appendChild(img);
+
+    i++;
+  }, 3000);
+  body.append(sliderDiv);
+  let moviesDiv = document.createElement("div");
+  moviesDiv.className = "moviesDiv";
+  function displayMovies(movies) {
+    moviesDiv.innerHTML = null;
+    movies.forEach(function (e) {
+      let div = document.createElement("div");
+      let img = document.createElement("img");
+      img.setAttribute("src", e.poster);
+      img.width = 300;
+      let nameh3 = document.createElement("h3");
+      nameh3.textContent = e.name;
+      let releaseDateP = document.createElement("p");
+      releaseDateP.textContent = e.releaseDate;
+      let ratingP = document.createElement("p");
+      ratingP.textContent = e.rating;
+
+      div.append(img, nameh3, releaseDateP, ratingP);
+      moviesDiv.append(div);
+    });
+  }
+
+  body.append(moviesDiv);
+
+  displayMovies(movies);
+
+  function showHigh() {
+    movies.sort(function (a, b) {
+      return b.rating - a.rating;
+    });
+
+    displayMovies(movies);
+  }
+
+  function showLow() {
+    movies.sort(function (a, b) {
+      return a.rating - b.rating;
+    });
+
+    displayMovies(movies);
+  }
+</script>

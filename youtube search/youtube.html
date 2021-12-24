@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    #search_results {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 20px;
+
+      justify-content: space-between;
+      margin-top: 5%;
+    }
+  </style>
+
+  <body>
+    <h1>Youtube</h1>
+
+    <input type="text" id="search" />
+
+    <button onclick="searchVideos()">Search</button>
+
+    <div id="search_results"></div>
+  </body>
+</html>
+<script>
+  let API = "AIzaSyAMMkYl1MBpsQNMdsdbjoqG5H-vZYfQ6gc";
+
+  let search_results_div = document.getElementById("search_results");
+
+  async function searchVideos() {
+    try {
+      let inp = document.getElementById("search").value;
+
+      let res = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?q=${inp}&key=${API}&type=video&maxResults=20&part=snippet`
+      );
+
+      let data = await res.json();
+      console.log("data:", data);
+
+      let array_of_videos = data.items;
+
+      appendVideos(array_of_videos);
+    } catch (err) {
+      console.log("err:", err);
+    }
+  }
+
+  const appendVideos = (arr) => {
+    arr.forEach((video) => {
+      let div = document.createElement("div");
+
+      div.addEventListener("click", () => {
+        localStorage.setItem(
+          "clicked",
+          JSON.stringify({ videoId: video.id.videoId })
+        );
+        window.location.href = "video.html";
+      });
+
+      let img = document.createElement("img");
+      img.src = video.snippet.thumbnails.high.url;
+
+      div.append(img);
+
+      search_results_div.append(div);
+    });
+  };
+</script>

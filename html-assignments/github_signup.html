@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github</title>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      div.container {
+        width: 100%;
+        height: 400px;
+        background-color: #23282e;
+        margin-top: 200px;
+      }
+
+      .container > div {
+        width: 80%;
+        height: 80%;
+        margin: auto;
+        padding-top: 3%;
+      }
+
+      .container > div h1 {
+        color: white;
+        text-align: center;
+      }
+
+      form {
+        width: 80%;
+        margin: auto;
+      }
+
+      label {
+        color: white;
+      }
+
+      form div {
+        display: inline-block;
+        margin: 20px;
+        width: 20%;
+      }
+
+      form input {
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      input[type='button'] {
+        color: white;
+        background-color: green;
+        border-radius: 5px;
+        border: 0;
+        padding: 10px;
+      }
+
+      form + p {
+        text-align: center;
+        color: gray;
+        font-size: 12px;
+      }
+
+      form + p > span {
+        color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>
+          Get started for free -join the millions of developers already using
+          GitHub to share their code, work together, and build amazing things.
+        </h1>
+        <form action="">
+          <div>
+            <label for="un">Username</label>
+            <br />
+            <input id="un" type="text" placeholder="Enter a Username" />
+          </div>
+          <div>
+            <label for="em">Email</label>
+            <br />
+            <input id="em" type="email" placeholder="Your email address" />
+          </div>
+          <div>
+            <label for="pass">Password</label>
+            <br />
+            <input id="pass" type="password" placeholder="Create a password" />
+          </div>
+          <div>
+            <input type="button" value="Sign up for Github" />
+          </div>
+        </form>
+        <p>
+          By clicking "Sign up for GitHub", you agree to our
+          <span>terms of service</span> terms of service and
+          <span>privacy statement.</span> We'll occasionally send you account
+          related emails.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News</title>
+
+    <link rel="stylesheet" href="styles/sidebar.css" />
+    <style>
+      #main {
+        margin-left: 320px;
+        width: 100%;
+      }
+
+      #main img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <nav id="sidebar"></nav>
+      <div id="main"></div>
+    </div>
+  </body>
+</html>
+<script type="module">
+  import sidebar from "./components/sidebar.js";
+  const sidebarDiv = document.getElementById("sidebar");
+  sidebarDiv.innerHTML = sidebar();
+
+  const mainDiv = document.getElementById("main");
+
+  const news = JSON.parse(localStorage.getItem("news")) || {};
+
+  function appendData(news, cont) {
+    cont.innerHTML = null;
+
+    const newsImg = document.createElement("img");
+    newsImg.src = news.urlToImage;
+
+    const newsTitle = document.createElement("h2");
+    newsTitle.textContent = news.title;
+
+    const newsContent = document.createElement("p");
+    newsContent.textContent = news.content;
+
+    const newsDes = document.createElement("p");
+    newsDes.textContent = news.description;
+
+    const div = document.createElement("div");
+
+    let date = new Date(news.publishedAt);
+
+    const authorSpan = document.createElement("span");
+    authorSpan.textContent = news.author + "  - ";
+
+    const dateSpan = document.createElement("span");
+    dateSpan.textContent = date;
+
+    div.append(authorSpan, dateSpan);
+
+    cont.append(newsTitle, div, newsImg, newsContent, newsDes);
+  }
+
+  appendData(news, mainDiv);
+</script>

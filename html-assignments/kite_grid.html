@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kite Grid</title>
+  </head>
+  <style>
+    .container {
+      display: grid;
+      grid-template-areas:
+        'a b c d'
+        'e f g g'
+        'h i i i'
+        'j j j j';
+
+      gap: 20px;
+      padding: 50px;
+      justify-content: left;
+    }
+
+    .container > div {
+      background-color: teal;
+      border-radius: 5px;
+      height: 150px;
+      width: 150px;
+    }
+
+    .container div:nth-child(1) {
+      grid-area: a;
+    }
+
+    .container div:nth-child(2) {
+      grid-area: b;
+    }
+
+    .container div:nth-child(3) {
+      grid-area: c;
+    }
+
+    .container div:nth-child(4) {
+      grid-area: d;
+    }
+
+    .container div:nth-child(5) {
+      grid-area: e;
+    }
+
+    .container div:nth-child(6) {
+      grid-area: f;
+    }
+
+    .container div:nth-child(7) {
+      grid-area: g;
+    }
+
+    .container div:nth-child(8) {
+      grid-area: h;
+    }
+
+    .container div:nth-child(9) {
+      grid-area: i;
+    }
+
+    .container div:nth-child(10) {
+      grid-area: j;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </body>
+</html>

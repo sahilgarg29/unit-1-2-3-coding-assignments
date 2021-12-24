@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Hindu</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        width: 70%;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+        grid-template-areas:
+          'a c'
+          'a d'
+          'a e'
+          'b f';
+
+        column-gap: 30px;
+        row-gap: 20px;
+        margin: auto;
+      }
+
+      #l1 {
+        grid-area: a;
+      }
+
+      #l2 {
+        grid-area: b;
+      }
+
+      #r1 {
+        grid-area: c;
+      }
+
+      #r2 {
+        grid-area: d;
+      }
+
+      #r3 {
+        grid-area: e;
+      }
+
+      #r4 {
+        grid-area: f;
+      }
+
+      #l1 > div:first-child {
+        height: 160px;
+      }
+
+      #l1 > div:first-child + div {
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: #08345b;
+        color: white;
+      }
+
+      .mainHeading {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .mainAuthor {
+        margin-bottom: 10px;
+      }
+
+      .mainSummary {
+        margin-bottom: 50px;
+      }
+
+      .flex {
+        display: flex;
+        /* height: 150px; */
+      }
+
+      .flex > div:first-child {
+        flex-basis: 30%;
+        /* height: 130px; */
+      }
+
+      .flex > div:first-child + div {
+        flex-basis: 70%;
+        box-sizing: border-box;
+        padding: 8px;
+      }
+
+      .catText {
+        color: #08345b;
+        font-size: 10px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="l1">
+        <div>
+          <img
+            src="https://th.thgim.com/news/national/fwrz7q/article30897008.ece/ALTERNATES/FREE_660/TH24Trump-visit1"
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div class="textDiv">
+          <p class="mainHeading">
+            Covaxin: Expert panel recommends emergency use approval for 2-18
+            year olds
+          </p>
+          <p class="mainAuthor">BINDU SHAJAN PERAPPADAN</p>
+          <p class="mainSummary">
+            Experts noted that two doses of Covaxin could be administered to
+            children within a gap of 28 days
+          </p>
+        </div>
+      </div>
+      <div id="l2" class="flex">
+        <div class="imgDiv">
+          <img
+            src="https://th.thgim.com/news/national/ylrudh/article36942719.ece/ALTERNATES/FREE_460/modi"
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div class="txt">
+          <p class="catText">NATIONAL</p>
+          <p class="summText">
+            PM Modi warns against ‘selective’ interpretation of human rights’
+            issues
+          </p>
+        </div>
+      </div>
+      <div id="r1" class="flex">
+        <div class="imgDiv">
+          <img
+            src="https://th.thgim.com/sci-tech/health/85kux5/article36967317.ece/ALTERNATES/FREE_660/vaccines"
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div class="txt">
+          <p class="catText">NATIONAL</p>
+          <p class="summText">
+            Booster dose welcome but may not be best solution for India yet:
+            doctors
+          </p>
+        </div>
+      </div>
+      <div id="r2" class="flex">
+        <div class="imgDiv">
+          <img
+            src="https://th.thgim.com/business/wrhyjs/article33480950.ece/ALTERNATES/FREE_660/TH04BUFACTORY"
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div class="txt">
+          <p class="catText">NATIONAL</p>
+          <p class="summText">Industrial production grows 11.9% in August</p>
+        </div>
+      </div>
+      <div id="r3" class="flex">
+        <div class="imgDiv">
+          <img
+            src="https://th.thgim.com/news/national/bfg8a7/article36961050.ece/ALTERNATES/FREE_660/PM-to-unveil-muG6R895UL34jpgjpg"
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div class="txt">
+          <p class="catText">NATIONAL</p>
+          <p class="summText">
+            MoD converts ₹65,000 crore orders from erstwhile OFB to 7 new DPSUs
+            ahead of formal launch
+          </p>
+        </div>
+      </div>
+      <div id="r4" class="flex">
+        <div class="imgDiv">
+          <img
+            src="https://th.thgim.com/news/national/jx8d1r/article36962697.ece/ALTERNATES/FREE_660/khare1"
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div class="txt">
+          <p class="catText">NATIONAL</p>
+          <p class="summText">Amit Khare appointed advisor to PM Modi</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

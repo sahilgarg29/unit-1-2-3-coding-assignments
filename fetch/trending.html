@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trending</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 20px;
+      }
+
+      .container img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Popular Movies</h1>
+    <div class="container"></div>
+  </body>
+</html>
+<script>
+  async function getPopularMovies() {
+    let res = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=1a3e203cc48ff8325bf9d7faba85c333&language=en-US&page=1"
+    );
+
+    res = await res.json();
+
+    displayMovies(res.results);
+  }
+
+  function displayMovies(movies) {
+    let cont = document.querySelector(".container");
+    cont.innerHTML = null;
+    if (!movies) {
+      cont.textContent = "No Movies Found";
+    } else {
+      movies.forEach(function (movie) {
+        let div = document.createElement("div");
+
+        let posterImg = document.createElement("img");
+        posterImg.src = `http://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+        let titleH3 = document.createElement("h3");
+        titleH3.textContent = movie.original_title;
+
+        let ratingP = document.createElement("p");
+        ratingP.textContent = "Ratings - " + movie.vote_average;
+
+        div.append(posterImg, titleH3, ratingP);
+        cont.append(div);
+      });
+    }
+  }
+
+  getPopularMovies();
+</script>

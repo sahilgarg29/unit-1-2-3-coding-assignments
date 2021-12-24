@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": "3",
+      "name": "Samsung Galaxy M21 2021 Edition (Arctic Blue, 4GB RAM, 64GB Storage) | FHD+ sAMOLED | 6 Months Free Screen Replacement for Prime (SM-M215GLBDINS)",
+      "image": "https://m.media-amazon.com/images/I/811lrGbXwIL._SL1500_.jpg",
+      "price": "13000"
+    },
+    {
+      "id": "5",
+      "name": "samsung tv",
+      "image": "",
+      "price": ""
+    }
+  ]
+}

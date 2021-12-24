@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+
+    <style>
+      .container {
+        width: 70%;
+        margin: auto;
+      }
+
+      #recentNews {
+        width: 100%;
+      }
+
+      #recentNews > h1 {
+        text-align: center;
+        font-size: 34px;
+        font-weight: bolder;
+        color: #1c1634;
+      }
+
+      #recentNews > div {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 60px;
+        margin-bottom: 150px;
+      }
+
+      #recentNews > div > div {
+        width: 25%;
+
+      }
+
+      #recentNews > div > div > div:first-child {
+        height: 200px;
+      }
+
+      #recentNews > div > div > div:last-child {
+        padding-left: 20px;
+      }
+
+      .category {
+        color: red;
+        font-size: 10px;
+      }
+
+      .date {
+        color: gray;
+        font-size: 10px;
+      }
+
+      .callBack-container {
+        background-color: #041d5c;
+      }
+
+      .callBack {
+        width: 70%;
+        margin: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      .callBack > div:first-child {
+        width: 35%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+        color: white;
+        margin-right: 10%;
+      }
+
+      .callBack > div:first-child > p {
+        line-height: 1.5;
+      }
+
+      .callBack > form {
+        width: 50%;
+
+        display: inline-block;
+        margin-top: 20px;
+      }
+      .callBack > form > div {
+        width: 100%;
+      }
+
+      .callBack > form > div:first-child > input {
+        width: 45%;
+        padding: 10px;
+        background-color: #041d5c;
+      }
+
+      .callBack > form > div:last-child > select {
+        margin-top: 15px;
+        width: 65%;
+        padding: 10px;
+        background-color: #041d5c;
+      }
+
+      .callBack > form > div:last-child > input {
+        margin-top: 15px;
+        width: 30%;
+        padding: 10px;
+        background-color: #ff425c;
+        color: white;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="recentNews">
+        <h1>Our Recent News</h1>
+        <div>
+          <div>
+            <div>
+              <img
+                src="https://via.placeholder.com/400x300"
+                alt=""
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div>
+              <p class="category">Business Planning</p>
+              <h3>Amazing Places to vist in summer</h3>
+              <p class="date">Nov 30,2020</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://via.placeholder.com/400x300"
+                alt=""
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div>
+              <p class="category">Audit</p>
+              <h3>Amazing Places to vist in summer</h3>
+              <p class="date">Nov 30,2020</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://via.placeholder.com/400x300"
+                alt=""
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div>
+              <p class="category">Business Planning</p>
+              <h3>Amazing Places to vist in summer</h3>
+              <p class="date">Nov 30,2020</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callBack-container">
+      <div class="callBack">
+        <div>
+          <h1>Request for CallBack</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis turpis
+            odio, congue at pharetra sit amet, posuere sit amet mi. Proin vitae
+            eros lorem.
+          </p>
+        </div>
+        <form>
+          <div>
+            <input type="text" placeholder="Name" />
+            <input type="text" placeholder="Phone" />
+          </div>
+          <div>
+            <select name="services" id="">
+              <option value="Setvices">services</option>
+            </select>
+            <input type="button" value="Send" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

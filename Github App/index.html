@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    body {
+      margin: 0px;
+    }
+    #header {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: black;
+      color: white;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    #logo {
+      width: 5%;
+      text-align: right;
+    }
+    #logo img {
+      width: 30%;
+      border-radius: 80%;
+      padding: 9px;
+    }
+    #profile img {
+      border-radius: 80%;
+      width: 50%;
+      height: 35px;
+      padding-top: 7%;
+    }
+    #search {
+      width: 10%;
+      padding: 12px;
+    }
+    ul {
+      padding-left: 0px;
+    }
+
+    #list li {
+      display: inline;
+      margin-right: 2%;
+    }
+    #options {
+      width: 75%;
+    }
+    #profile {
+      width: 5%;
+    }
+
+    #main {
+      padding: 3%;
+    }
+  </style>
+  <body>
+    <nav></nav>
+  </body>
+</html>
+
+<script type="module">
+  import navbar from "./components/navbar.js";
+
+  const nav = document.querySelector("nav");
+
+  nav.innerHTML = navbar();
+</script>

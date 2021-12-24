@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>McDonald</title>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <label for="veg-burger">Veg Burger</label>
+        <input type="checkbox" id="veg-burger" value="veg-burger" />
+      </div>
+      <label for="nonveg-burger">Non Veg Burger</label>
+      <input type="checkbox" id="nonveg-burger" value="nonveg-burger" />
+      <div>
+        <label for="french-fries">French Fries</label>
+        <input type="checkbox" id="french-fries" value="french-fries" />
+      </div>
+      <div>
+        <label for="cold-drink">Cold Drink</label>
+        <input type="checkbox" id="cold-drink" value="cold-drink" />
+      </div>
+      <button onclick="orderFood()">Order Food</button>
+    </div>
+  </body>
+</html>
+<script>
+  var orders = [];
+
+  function orderFood() {
+    var id = Math.random() * 10000;
+
+    var vegBurger = document.getElementById("veg-burger");
+    var nonVegBurger = document.getElementById("nonveg-burger");
+    var frenchFries = document.getElementById("french-fries");
+    var coldDrink = document.getElementById("cold-drink");
+
+    var order = {};
+
+    order.id = id;
+    order["food"] = [];
+
+    if (vegBurger.checked) {
+      order.food.push(vegBurger.value);
+    }
+
+    if (nonVegBurger.checked) {
+      order.food.push(nonVegBurger.value);
+    }
+
+    if (frenchFries.checked) {
+      order.food.push(frenchFries.value);
+    }
+
+    if (coldDrink.checked) {
+      order.food.push(coldDrink.value);
+    }
+
+    orders.push(order);
+
+    var mypromise = new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve("order No." + id + " is Ready");
+      }, 5000);
+    });
+
+
+    var res = await mypromise;
+
+    alert(res);
+  }
+</script>

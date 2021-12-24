@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      padding: 20px;
+    }
+
+    #solvedSanity {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      margin-bottom: 60px;
+    }
+
+    #solvedSanity > div:nth-child(1) {
+      grid-column: 1/4;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    #solvedSanity > div:nth-child(1) ~ div {
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+
+    #solvedSanity > div:nth-child(1) ~ div > div:last-child {
+      padding: 10px;
+
+      /* background-color: blue; */
+    }
+
+    #solvedSanity > div:nth-child(1) ~ div > div:last-child > p {
+      color: gray;
+      margin-bottom: 10px;
+    }
+
+    #solvedSanity > div:nth-child(1) ~ div > div:last-child > h2 {
+      margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    #solutions {
+      display: grid;
+      gap: 20px;
+      grid-template-areas:
+        'a a a'
+        'b c d'
+        'e f g';
+    }
+
+    #solutions > div:first-child ~ div {
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    #solutions > div > a {
+      color: black;
+    }
+
+    #solutions > div > h2 {
+      margin-bottom: 10px;
+    }
+
+    #solutions > div:nth-child(1) {
+      grid-area: a;
+    }
+
+    #solutions > div:nth-child(2) {
+      grid-area: b;
+    }
+
+    #solutions > div:nth-child(3) {
+      grid-area: c;
+    }
+
+    #solutions > div:nth-child(4) {
+      grid-area: d;
+    }
+
+    #solutions > div:nth-child(5) {
+      grid-area: e;
+    }
+
+    #solutions > div:nth-child(6) {
+      grid-area: f;
+    }
+
+    #solutions > div:nth-child(7) {
+      grid-area: g;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div id="solvedSanity">
+        <div><p>Challenges Solved With Sanity</p></div>
+        <div>
+          <div>
+            <img
+              src="https://via.placeholder.com/350x200"
+              alt=""
+              width="100%"
+            />
+          </div>
+          <div>
+            <p>Eurostar</p>
+            <h2>A better Digital experince for millions of travellers</h2>
+            <a href="#">Read Case Study -></a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <img
+              src="https://via.placeholder.com/350x200"
+              alt=""
+              width="100%"
+            />
+          </div>
+          <div>
+            <p>Eurostar</p>
+            <h2>A better Digital experince for millions of travellers</h2>
+            <a href="#">Read Case Study -></a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <img
+              src="https://via.placeholder.com/350x200"
+              alt=""
+              width="100%"
+            />
+          </div>
+          <div>
+            <p>Eurostar</p>
+            <h2>A better Digital experince for millions of travellers</h2>
+            <a href="#">Read Case Study -></a>
+          </div>
+        </div>
+      </div>
+
+      <div id="solutions">
+        <div><p>EXPLORE SOLUTIONS</p></div>
+        <div>
+          <h2>Headless CMS</h2>
+          <a href="#">Build Cutting edge Web experinces without restrictions</a>
+        </div>
+        <div>
+          <h2>Headless CMS</h2>
+          <a href="#">Build Cutting edge Web experinces without restrictions</a>
+        </div>
+        <div>
+          <h2>Headless CMS</h2>
+          <a href="#">Build Cutting edge Web experinces without restrictions</a>
+        </div>
+        <div>
+          <h2>Headless CMS</h2>
+          <a href="#">Build Cutting edge Web experinces without restrictions</a>
+        </div>
+        <div>
+          <h2>Headless CMS</h2>
+          <a href="#">Build Cutting edge Web experinces without restrictions</a>
+        </div>
+        <div>
+          <h2>Headless CMS</h2>
+          <a href="#">Build Cutting edge Web experinces without restrictions</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

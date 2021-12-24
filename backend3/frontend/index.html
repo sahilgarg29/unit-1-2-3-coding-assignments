@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #products {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 20px;
+      }
+
+      #products img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add Products</h1>
+
+      <form>
+        <select name="addorupdate" id="addorupdate">
+          <option value="add">Add</option>
+          <option value="update">Update</option>
+        </select>
+
+        <input type="number" name="id" id="id" placeholder="Enter Id" />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Enter Product Name"
+        />
+        <input
+          type="text"
+          name="image"
+          id="image"
+          placeholder="Enter Image URL"
+        />
+        <input
+          type="number"
+          name="price"
+          id="price"
+          placeholder="Enter Product Price"
+        />
+        <input type="submit" value="Add Product" />
+      </form>
+    </div>
+
+    <div>
+      <h1>All Products</h1>
+      <div id="products"></div>
+    </div>
+  </body>
+</html>
+<script>
+  const form = document.querySelector("form");
+  const productsDiv = document.getElementById("products");
+  async function getData() {
+    let res = await fetch("http://localhost:5000/api/products");
+    res = await res.json();
+
+    appendData(res, productsDiv);
+  }
+
+  getData();
+
+  function appendData(data, mainDiv) {
+    data.forEach((e) => {
+      const div = document.createElement("div");
+
+      const name = document.createElement("h4");
+      name.textContent = e.name;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.addEventListener("click", async () => {
+        let res = await fetch(`http://localhost:5000/api/products/${e.id}`, {
+          method: "DELETE",
+        });
+
+        res = await res.json();
+
+        console.log(res);
+      });
+
+      const img = document.createElement("img");
+      img.src = e.image;
+
+      const price = document.createElement("p");
+      price.textContent = "Price - Rs." + e.price;
+
+      div.append(img, name, price, deleteBtn);
+      mainDiv.append(div);
+    });
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let opt = document.getElementById("addorupdate").value;
+    if (opt == "add") {
+      let data = {
+        id: document.getElementById("id").value,
+        name: document.getElementById("name").value,
+        image: document.getElementById("image").value,
+        price: document.getElementById("price").value,
+      };
+
+      let res = await fetch("http://localhost:5000/api/products", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      res = await res.json();
+
+      console.log(res);
+    } else if (opt == "update") {
+      var id = document.getElementById("id").value;
+      let data = {
+        id: id,
+        name: document.getElementById("name").value,
+        image: document.getElementById("image").value,
+        price: document.getElementById("price").value,
+      };
+
+      let res = await fetch(`http://localhost:5000/api/products/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      res = await res.json();
+    }
+  });
+</script>

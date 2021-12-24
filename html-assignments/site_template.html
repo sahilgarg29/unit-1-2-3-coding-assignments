@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site Template</title>
+  </head>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2.5fr;
+      gap: 30px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #nav {
+      background-color: red;
+      grid-column: 1/3;
+      height: 50px;
+      border-radius: 5px;
+    }
+
+    #left-col {
+      background-color: lawngreen;
+      height: 550px;
+      border-radius: 5px;
+    }
+
+    #right-col {
+      background-color: green;
+      height: 550px;
+      border-radius: 5px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div id="nav"></div>
+      <div id="left-col"></div>
+      <div id="right-col"></div>
+    </div>
+  </body>
+</html>

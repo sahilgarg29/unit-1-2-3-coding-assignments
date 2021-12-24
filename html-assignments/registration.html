@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      body {
+        /* border: 1px solid red; */
+        width: 980px;
+        margin: auto;
+        margin-top: 10px;
+        height: 550px;
+        margin-top: 150px;
+      }
+
+      .form {
+        /* border: 1px solid red; */
+        float: left;
+        width: 300px;
+        height: 500px;
+        margin-left: 110px;
+        /* margin-top: 150px; */
+      }
+
+      .details {
+        /* border: 1px solid red; */
+        display: inline-block;
+        width: 250px;
+        height: 250px;
+        margin-left: 110px;
+        background-color: black;
+        padding: 60px 40px;
+      }
+
+      .label {
+        color: black;
+        font-size: 24px;
+        font-family: sans-serif;
+        margin-bottom: 10px;
+      }
+
+      .field {
+        border: 2px solid black;
+        width: 100%;
+        height: 30px;
+      }
+
+      .formfield {
+        margin-bottom: 25px;
+      }
+
+      .valid {
+        color: red;
+        font-family: sans-serif;
+        font-size: 20px;
+        margin-top: 5px;
+      }
+
+      button {
+        width: 100%;
+        background-color: black;
+        color: white;
+        font-family: sans-serif;
+        padding: 10px;
+        border: none;
+        font-size: 24px;
+      }
+
+      .details-label {
+        color: white;
+        font-family: sans-serif;
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .details-content {
+        color: white;
+        font-family: sans-serif;
+        font-size: 24px;
+      }
+
+      .details-field {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <div class="formfield">
+        <p class="label">NAME</p>
+        <input type="text" class="field" />
+      </div>
+      <div class="formfield">
+        <p class="label">EMAIL</p>
+        <input type="text" class="field" />
+      </div>
+      <div class="formfield">
+        <p class="label">MOBILE</p>
+        <input type="text" class="field" />
+        <p class="valid">Enter a Valid Mobile</p>
+      </div>
+
+      <button>REGISTER</button>
+    </div>
+
+    <div class="details">
+      <div class="details-field">
+        <p class="details-label">NAME</p>
+        <p class="details-content">SAHIL GARG</p>
+      </div>
+      <div class="details-field">
+        <p class="details-label">EMAIL</p>
+        <p class="details-content">gargsahilratia@gmail.com</p>
+      </div>
+      <div class="details-field">
+        <p class="details-label">MOBILE</p>
+        <p class="details-content">8168257140</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+    <link rel="stylesheet" href="styles/sidebar.css" />
+    <style>
+      #allNews {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-left: 320px;
+      }
+
+      #allNews > div {
+        display: flex;
+        gap: 20px;
+      }
+
+      #allNews > div img {
+        width: 250px;
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .author {
+        color: gray;
+        font-size: 12px;
+      }
+
+      form,
+      .heading {
+        margin-left: 320px;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="heading">Search News</h1>
+    <form action="">
+      <input type="text" name="search" id="search" />
+      <input type="submit" value="Search" />
+    </form>
+    <div id="container">
+      <nav id="sidebar"></nav>
+      <div id="allNews"></div>
+    </div>
+  </body>
+</html>
+<script type="module">
+  import sidebar from "./components/sidebar.js";
+  import { getData } from "./scripts/getData.js";
+  const sidebarDiv = document.getElementById("sidebar");
+  const allNewsDiv = document.getElementById("allNews");
+  const searchForm = document.querySelector("form");
+  const API_KEY = "eff51774e6d5492cb26f09655cff8775";
+  sidebarDiv.innerHTML = sidebar();
+
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let searchText = document.getElementById("search").value;
+
+    let res = getData(
+      `https://newsapi.org/v2/everything?q=${searchText}&sortBy=popularity&apiKey=${API_KEY}`
+    );
+
+    res.then((data) => {
+      console.log(data.articles);
+      appendData(data.articles, allNewsDiv);
+    });
+  });
+
+  function appendData(data, cont) {
+    cont.innerHTML = "";
+    data.forEach((news) => {
+      console.log(news);
+      const div = document.createElement("div");
+      div.style.cursor = "pointer";
+      div.addEventListener("click", () => {
+        localStorage.setItem("news", JSON.stringify(news));
+        window.location.href = "news.html";
+      });
+
+      const newsimg = document.createElement("img");
+      newsimg.src = news.urlToImage;
+
+      const titleDiv = document.createElement("div");
+
+      const newsTitle = document.createElement("p");
+      newsTitle.className = "title";
+      newsTitle.textContent = news.title;
+
+      const newsAuthor = document.createElement("p");
+      newsAuthor.className = "author";
+      newsAuthor.textContent = news.author;
+
+      titleDiv.append(newsTitle, newsAuthor);
+
+      div.append(newsimg, titleDiv);
+      cont.append(div);
+    });
+  }
+</script>

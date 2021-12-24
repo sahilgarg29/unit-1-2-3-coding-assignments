@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" name="addTask" id="addTask" placeholder="Add Task" />
+      <button onclick="addTask()">Add</button>
+      <div id="tasks"></div>
+    </div>
+  </body>
+</html>
+<script>
+  function Task(name) {
+    this.name = name;
+    this.status = false;
+    this.date = new Date();
+  }
+
+  var tasksDiv = document.getElementById("tasks");
+
+  function addTask() {
+    let name = document.getElementById("addTask").value;
+    var task = new Task(name);
+
+    let div = document.createElement("div");
+
+    let taskP = document.createElement("p");
+    taskP.textContent = task.name + " - " + task.date;
+
+    let status = document.createElement("p");
+    status.textContent = "Status - " + task.status;
+
+    let doneBtn = document.createElement("button");
+    doneBtn.textContent = "Done";
+    doneBtn.addEventListener("click", function () {
+      taskP.style.textDecoration = "line-through";
+      div.style.backgroundColor = "green";
+    });
+
+    let removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click", function () {
+      div.innerHTML = null;
+    });
+
+    let hr = document.createElement("hr");
+
+    div.append(taskP, status, doneBtn, removeBtn, hr);
+    tasksDiv.append(div);
+  }
+
+  function toggleTask(task) {
+    if (task.status) {
+      task.status = false;
+    } else {
+      task.status = true;
+    }
+
+    return task;
+  }
+</script>

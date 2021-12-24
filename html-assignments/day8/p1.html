@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #layout {
+      display: grid;
+      grid-template-areas:
+        'nav nav nav'
+        'lb lb rb1'
+        'lb lb rb2'
+        'lb lb rb3';
+      gap: 20px;
+    }
+
+    #nav {
+      grid-area: nav;
+      background-color: yellow;
+      height: 50px;
+    }
+
+    #lb {
+      grid-area: lb;
+      background-color: red;
+      height: 500px;
+    }
+
+    #rb-1 {
+      grid-area: rb1;
+    }
+
+    #rb-2 {
+      grid-area: rb2;
+    }
+
+    #rb-3 {
+      grid-area: rb3;
+    }
+
+    .right {
+      background-color: green;
+    }
+
+    @media screen and (min-width: 500px) and (max-width: 760px) {
+      #layout {
+        grid-template-areas:
+          'nav nav nav'
+          'lb lb lb'
+          'lb lb lb'
+          'rb1 rb2 rb3';
+      }
+
+      .right {
+        height: 200px;
+      }
+
+      #lb {
+        height: 400px;
+      }
+    }
+
+    @media screen and (min-width: 0px) and (max-width: 499px) {
+      #layout {
+        grid-template-areas:
+          'nav'
+          'lb'
+          'rb1'
+          'rb2'
+          'rb3';
+      }
+
+      .right {
+        height: 100px;
+      }
+
+      #lb {
+        height: 200px;
+      }
+    }
+  </style>
+  <body>
+    <div id="layout">
+      <div id="nav">Navigation</div>
+      <div id="lb">Left Box</div>
+      <div id="rb-1" class="right">Right Box 1</div>
+      <div id="rb-2" class="right">Right Box 2</div>
+      <div id="rb-3" class="right">Right Box 3</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div id="container">
+      <form action="">
+        <input
+          type="text"
+          name="userName"
+          id="user"
+          placeholder="Enter User Name"
+        />
+        <input
+          type="password"
+          name="pass"
+          id="pass"
+          placeholder="Enter Your Password"
+        />
+
+        <input type="submit" value="submit" />
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  let form = document.querySelector("form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let data = {
+      password: document.getElementById("pass").value,
+      username: document.getElementById("user").value,
+    };
+
+    let res = await fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    res = await res.json();
+
+    console.log(res);
+    if (res.error == false) {
+      window.location.href = "youtube.html";
+    }
+  });
+</script>

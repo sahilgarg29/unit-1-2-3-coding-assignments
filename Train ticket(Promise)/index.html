@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="checkAvailability()">Check Availability</button>
+    <div class="container">
+      <h3>Passenger Count</h3>
+      <div class="pass"></div>
+    </div>
+  </body>
+</html>
+<script>
+  const MtG = ["A", "C", "D", "E", "F", "V", "Z", "M"];
+  const DtG = ["A", "C", "D", "E", "F", "V", "Z", "M"];
+  const PtG = ["A", "C", "D", "E", "F", "V", "Z", "M"];
+
+  function displayPassenger() {
+    var pass = document.querySelector(".pass");
+    pass.innerHTML = null;
+
+    var p1 = document.createElement("p");
+    p1.textContent = "MtG - " + MtG.length;
+
+    var p2 = document.createElement("p");
+    p2.textContent = "DtG - " + DtG.length;
+
+    var p3 = document.createElement("p");
+    p3.textContent = "PtG - " + PtG.length;
+
+    pass.append(p1, p2, p3);
+  }
+
+  displayPassenger();
+
+  async function checkAvailability() {
+    const myPromise = new Promise(function (resolve, reject) {
+      setInterval(function () {
+        if (MtG.length === 4) {
+          resolve("MtG four seats available");
+          clearInterval(interval);
+        } else if (DtG.length === 4) {
+          resolve("DtG four seats available");
+          clearInterval(interval);
+        } else if (PtG.length === 4) {
+          resolve("PtG four seats available");
+          clearInterval(interval);
+        }
+      }, 1000);
+    });
+
+    let res = await myPromise;
+
+    alert(res);
+    window.location.href = "booking.html";
+  }
+
+  function cancelTicket() {
+    let cs1 = Math.random() * 5000;
+    let cs2 = Math.random() * 5000;
+    let cs3 = Math.random() * 5000;
+
+    setTimeout(function () {
+      MtG.pop();
+      displayPassenger();
+    }, cs1);
+
+    setTimeout(function () {
+      DtG.pop();
+      displayPassenger();
+    }, cs2);
+
+    setTimeout(function () {
+      PtG.pop();
+      displayPassenger();
+    }, cs3);
+  }
+
+  var interval = setInterval(cancelTicket, 2000);
+</script>

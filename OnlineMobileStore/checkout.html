@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <input type="text" placeholder="Enter Full Name" id="name" />
+        <br />
+        <br />
+
+        <input type="text" placeholder="Enetr Address" id="address" />
+        <br />
+        <br />
+
+        <input type="number" placeholder="Enter Pincode" id="pincode" />
+        <br />
+        <br />
+
+        <input type="number" placeholder="Enter Phone Number" id="phNumber" />
+        <br />
+        <br />
+
+        <input
+          type="button"
+          value="Go to Payment Page"
+          id="submit"
+          onclick="handleForm()"
+        />
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  function handleForm() {
+    var address_data = {};
+    address_data.name = document.getElementById('name').value;
+    address_data.address = document.getElementById('address').value;
+    address_data.pincode = document.getElementById('pincode').value;
+    address_data.phNumber = document.getElementById('phNumber').value;
+
+    localStorage.setItem('address_data', JSON.stringify(address_data));
+    window.location.href = 'payment.html';
+
+    console.log(name, address, pincode, phNumber);
+  }
+</script>

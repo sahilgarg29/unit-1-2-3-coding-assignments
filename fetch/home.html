@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Movies</title>
+    <style>
+      .searchBar {
+        display: flex;
+        gap: 20px;
+      }
+
+      .searchBar button {
+        padding: 0 20px;
+      }
+
+      #search {
+        flex-grow: 1;
+        height: 30px;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 20px;
+      }
+
+      .container > div {
+        /* border: 1px solid black; */
+      }
+
+      .container img {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="searchBar">
+      <input
+        oninput="debounce(searchMovie, 500)"
+        id="search"
+        type="text"
+        placeholder="Search Movie"
+      />
+      <!-- <button onclick="searchMovie()">Search</button> -->
+    </div>
+    <div class="container"></div>
+  </body>
+</html>
+<script>
+  let id;
+  function searchMovie() {
+    let searchText = document.getElementById("search").value;
+
+    if (searchText.trim().length != 0) {
+      fetch(`https://www.omdbapi.com/?s=${searchText}&apikey=feab4f9`)
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (res) {
+          let movies = res.Search;
+          displayMovies(res.Search);
+        });
+    }
+  }
+
+  function displayMovies(movies) {
+    let cont = document.querySelector(".container");
+    cont.innerHTML = null;
+    if (!movies) {
+      cont.textContent = "No Movies Found";
+    } else {
+      movies.forEach(function (movie) {
+        let div = document.createElement("div");
+
+        div.addEventListener("click", function () {
+          movieDetails(movie.imdbID);
+        });
+
+        let posterImg = document.createElement("img");
+        posterImg.src = movie.Poster;
+
+        let titleH3 = document.createElement("h3");
+        titleH3.textContent = movie.Title;
+
+        div.append(posterImg, titleH3);
+        cont.append(div);
+      });
+    }
+  }
+
+  async function movieDetails(imdbID) {
+    console.log(imdbID);
+    let res = await fetch(
+      `https://www.omdbapi.com/?i=${imdbID}&apikey=feab4f9`
+    );
+
+    res = await res.json();
+    displayMovieDetails(res);
+
+    console.log(res);
+  }
+
+  function displayMovieDetails(data) {
+    let cont = document.querySelector(".container");
+    cont.innerHTML = null;
+
+    let div = document.createElement("div");
+
+    let posterImg = document.createElement("img");
+    posterImg.src = data.Poster;
+
+    let titleH3 = document.createElement("h3");
+    titleH3.textContent = data.Title;
+
+    let imdbRatingP = document.createElement("p");
+    imdbRatingP.textContent = "IMDB Ratings - " + data.Ratings[0].Value;
+
+    let yearP = document.createElement("p");
+    yearP.textContent = "Year of Release - " + data.Year;
+
+    div.append(posterImg, titleH3, imdbRatingP, yearP);
+    cont.append(div);
+  }
+
+  function debounce(func, delay) {
+    clearTimeout(id);
+    id = setTimeout(function () {
+      func();
+    }, delay);
+  }
+</script>

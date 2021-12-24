@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      th,
+      td {
+        border: 1px solid black;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Add Product</h1>
+    <form action="">
+      <label for="">Category</label>
+      <select name="" id="cat">
+        <option value="">---</option>
+        <option value="electronics">Electronics</option>
+        <option value="furniture">Furniture</option>
+        <option value="home-appliance">Home Appliance</option>
+        <option value="books">Books</option>
+      </select>
+      <label for="">Title</label>
+      <input id="title" type="text" placeholder="Enter Title" />
+      <label for="">Description</label>
+      <input id="des" type="textarea" />
+      <label for="">Price</label>
+      <input id="price" type="number" placeholder="Enter Price" />
+      <input type="submit" value="Add" />
+    </form>
+    <div>
+      <h1>Product info</h1>
+      <select name="" id="sortByPrice" onchange="handlePriceSort()">
+        <option value="">sort by Price</option>
+        <option value="low">Low To High</option>
+        <option value="high">High to Low</option>
+      </select>
+      <select name="" id="filterByCat" onchange="handleFilter()">
+        <option value="">Filter By Category</option>
+        <option value="electronics">Electronics</option>
+        <option value="furniture">Furniture</option>
+        <option value="home-appliance">Home Appliance</option>
+        <option value="books">Books</option>
+      </select>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector('form').addEventListener('submit', addItem);
+  var shoppingList = JSON.parse(localStorage.getItem('totalList')) || [];
+  function addItem(event) {
+    event.preventDefault();
+    var cat = document.getElementById('cat').value;
+    var title = document.getElementById('title').value;
+    var des = document.getElementById('des').value;
+    var price = document.getElementById('price').value;
+
+    var list = {
+      itemCat: cat,
+      itemTitle: title,
+      itemDes: des,
+      itemPrice: price,
+    };
+
+    shoppingList.push(list);
+    localStorage.setItem('totalList', JSON.stringify(shoppingList));
+    displayItems(shoppingList);
+  }
+
+  function displayItems(shoppingList) {
+    document.querySelector('tbody').innerHTML = '';
+    shoppingList.map(function (item) {
+      var tr = document.createElement('tr');
+
+      var td1 = document.createElement('td');
+      td1.textContent = item.itemCat;
+
+      var td2 = document.createElement('td');
+      td2.textContent = item.itemTitle;
+
+      var td3 = document.createElement('td');
+      td3.textContent = item.itemDes;
+
+      var td4 = document.createElement('td');
+      td4.textContent = item.itemPrice;
+
+      tr.append(td1, td2, td3, td4);
+
+      document.querySelector('tbody').append(tr);
+    });
+  }
+
+  window.addEventListener('load', function () {
+    var shoppingList = JSON.parse(localStorage.getItem('totalList'));
+    displayItems(shoppingList);
+  });
+
+  function handlePriceSort() {
+    var selected = document.getElementById('sortByPrice').value;
+    console.log(selected);
+    if (selected == 'low') {
+      shoppingList = shoppingList.sort(function (a, b) {
+        return a.itemPrice - b.itemPrice;
+      });
+      console.log(shoppingList);
+      displayItems(shoppingList);
+    } else if (selected == 'high') {
+      shoppingList = shoppingList.sort(function (a, b) {
+        return b.itemPrice - a.itemPrice;
+      });
+
+      displayItems(shoppingList);
+    }
+  }
+
+  function handleFilter() {
+    var selected = document.getElementById('filterByCat').value;
+
+    var a = shoppingList.filter(function (e) {
+      return selected == e.itemCat;
+    });
+
+    displayItems(a);
+  }
+</script>

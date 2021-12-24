@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+  </head>
+  <body>
+    <div class="searchBar">
+      <input type="text" id="city" />
+      <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="container"></div>
+  </body>
+</html>
+<script>
+  const apiKey = "535358b8b27dfafea8f8b9561df93b6b";
+
+  async function getWeather() {
+    let city = document.getElementById("city").value;
+
+    let f1 = fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=535358b8b27dfafea8f8b9561df93b6b`
+    );
+
+    let f2 = fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=7&appid=535358b8b27dfafea8f8b9561df93b6b`
+    );
+
+    let res = await Promise.all([f1, f2]);
+
+    res = await Promise.all(
+      res.map(function (e) {
+        return e.json();
+      })
+    );
+    displayMap(city, res);
+    console.log(res);
+  }
+
+  function displayMap(city, res) {
+    console.log("display Map");
+    const cont = document.querySelector(".container");
+    cont.innerHTML = null;
+
+    const div = document.createElement("div");
+    const minTempP = document.createElement("p");
+    minTempP.textContent =
+      "Min Temp - " + (res[0].main.temp_min - 273).toFixed(2) + "C";
+
+    const maxTempP = document.createElement("p");
+    maxTempP.textContent =
+      "Max Temp - " + (res[0].main.temp_max - 273).toFixed(2) + "C";
+
+    const windSpeedP = document.createElement("p");
+    windSpeedP.textContent = "WindSpeed - " + res[0].wind.speed;
+
+    var sunrise = new Date(res[0].sys.sunrise);
+    var sunset = new Date(res[0].sys.sunset);
+
+    const sunriseP = document.createElement("p");
+    sunriseP.textContent =
+      "Sunrise - " + sunrise.getHours() + ":" + sunrise.getMinutes();
+
+    const sunsetP = document.createElement("p");
+    sunsetP.textContent =
+      "Sunset - " + sunset.getHours() + ":" + sunset.getMinutes();
+
+    div.append(minTempP, maxTempP, windSpeedP, sunriseP, sunsetP);
+
+    const div2 = document.createElement("div");
+
+    res[1].list.forEach(function (data) {
+      var p = document.createElement("p");
+
+      p.textContent =
+        data.dt_txt.split(" ")[0] +
+        " :-   " +
+        (data.main.temp_min - 273).toFixed(2) +
+        "C" +
+        " - " +
+        (data.main.temp_max - 273).toFixed(2) +
+        "C";
+
+      div2.append(p);
+    });
+
+    const iframe = document.createElement("iframe");
+    iframe.width = 1080;
+    iframe.height = 720;
+    iframe.allowFullscreen = true;
+    iframe.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBEjndXs89Fx8LMLLJmQgkvvj21X1Fn8eo&q=${city}`;
+
+    cont.append(div, iframe, div2);
+  }
+</script>

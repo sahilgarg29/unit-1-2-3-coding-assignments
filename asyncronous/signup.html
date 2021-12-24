@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+    <style>
+      nav {
+        display: flex;
+        border: 1px solid black;
+        justify-content: right;
+        gap: 50px;
+      }
+
+      nav div:last-child {
+        margin-right: 50px;
+      }
+
+      nav a {
+        display: block;
+        text-decoration: none;
+        color: black;
+        padding: 10px;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div><a href="home.html">Home</a></div>
+      <div><a href="login.html">Login</a></div>
+      <div><a href="signup.html">SignUp</a></div>
+    </nav>
+    <section id="main">
+      <h1>SignUp</h1>
+
+      <div class="form">
+        <form>
+          <input
+            id="user-name"
+            type="text"
+            placeholder="Enter Your Name"
+            required
+          />
+          <input
+            id="user-email"
+            type="email"
+            placeholder="Enter Your Email"
+            required
+          />
+          <input
+            id="user-phone"
+            type="number"
+            placeholder="Enter Your Phone No."
+            required
+          />
+          <input
+            id="user-pass"
+            type="password"
+            placeholder="Enter Your Password"
+            required
+          />
+          <input type="submit" />
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
+<script>
+  var users = JSON.parse(localStorage.getItem("users")) || [];
+  document.querySelector(".form").addEventListener("submit", function (form) {
+    form.preventDefault();
+
+    var userName = document.getElementById("user-name").value;
+    var userEmail = document.getElementById("user-email").value;
+    var userPass = document.getElementById("user-pass").value;
+    var userPhone = document.getElementById("user-phone").value;
+
+    var user = users.filter(function (e) {
+      if (e.userEmail == userEmail) {
+        return true;
+      }
+
+      return false;
+    });
+
+    if (user.length == 0) {
+      users.push({
+        userName: userName,
+        userEmail: userEmail,
+        userPhone: userPhone,
+        userPass: userPass,
+      });
+
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("user successfully signed up.");
+      window.location.href = "login.html";
+    } else {
+      alert("user already signup. please login");
+    }
+  });
+</script>

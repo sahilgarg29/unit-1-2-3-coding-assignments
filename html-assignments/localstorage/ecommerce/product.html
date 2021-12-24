@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="color: red">Product Page</h1>
+    <hr />
+    <br />
+    <button onclick="gotoCart()">Go to Cart</button>
+    <select name="" id="sortByPrice" onchange="handlePriceSort()">
+      <option value="">sort by Price</option>
+      <option value="low">Low To High</option>
+      <option value="high">High to Low</option>
+    </select>
+    <select name="" id="sortByName" onchange="handleNameSort()">
+      <option value="">sort by Name</option>
+      <option value="asc">Ascending</option>
+      <option value="dsc">Descending</option>
+    </select>
+    <select name="" id="filterByCat" onchange="handleFilter()">
+      <option value="">Filter By Category</option>
+      <option value="tee">tee</option>
+      <option value="shoes">Shoes</option>
+      <option value="shirt">Shirt</option>
+    </select>
+  </body>
+</html>
+<script>
+  var product = JSON.parse(localStorage.getItem('shoppingBag'));
+  var cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+  product.forEach(function (item) {
+    var h1 = document.createElement('h1');
+    h1.textContent = item.name;
+
+    var h2 = document.createElement('p');
+    h2.textContent = '$' + item.price;
+
+    var h3 = document.createElement('h3');
+    h3.textContent = item.type;
+
+    var img = document.createElement('img');
+    img.setAttribute('src', item.image_url);
+    img.width = 100;
+
+    var btn = document.createElement('button');
+    btn.textContent = 'Add to Cart';
+    btn.addEventListener('click', function () {
+      addToCart(item);
+    });
+    btn.style.display = 'block';
+
+    document.querySelector('body').append(h1, h2, h3, img, btn);
+  });
+
+  function addToCart(item) {
+    cart.push(item);
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+  }
+
+  function gotoCart() {
+    window.location.href = 'cart.html';
+  }
+
+  function handlePriceSort() {
+    var selected = document.getElementById('sortByPrice').value;
+    console.log(selected);
+    if (selected == 'low') {
+      product = product.sort(function (a, b) {
+        return a.price - b.price;
+      });
+
+      localStorage.setItem('shoppingBag', JSON.stringify(product));
+      window.location.reload();
+    } else if (selected == 'high') {
+      product = product.sort(function (a, b) {
+        return b.price - a.price;
+      });
+
+      localStorage.setItem('shoppingBag', JSON.stringify(product));
+      window.location.reload();
+    }
+  }
+
+  function handleNameSort() {
+    var selected = document.getElementById('sortByName').value;
+
+    if (selected == 'asc') {
+      product = product.sort(function (a, b) {
+        return a.name > b.name ? 1 : -1;
+      });
+
+      localStorage.setItem('shoppingBag', JSON.stringify(product));
+      window.location.reload();
+    } else if (selected == 'dsc') {
+      product = product.sort(function (a, b) {
+        return a.name > b.name ? -1 : 1;
+      });
+
+      localStorage.setItem('shoppingBag', JSON.stringify(product));
+      window.location.reload();
+    }
+  }
+
+  function handleFilter() {}
+</script>

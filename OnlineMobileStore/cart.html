@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+  </head>
+  <body>
+    <h1>Cart</h1>
+    <hr />
+
+    <div id="container"></div>
+    <hr />
+    <div id="checkout">
+      <input type="text" placeholder="Apply Coupon Code" id="couponText" />
+      <button id="apply" onclick="validateCoupon()">Apply</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  var cart = JSON.parse(localStorage.getItem('cart'));
+  var checkout = document.getElementById('checkout');
+  displayElements(cart);
+
+  var total = 0;
+
+  for (var i = 0; i < cart.length; i++) {
+    total += cart[i].price;
+  }
+
+  localStorage.setItem('cart_total', total);
+
+  var chkoutBtn = document.createElement('button');
+  chkoutBtn.textContent = 'Checkout';
+
+  chkoutBtn.addEventListener('click', function () {
+    window.location.href = 'checkout.html';
+  });
+
+  var CartTotal = document.createElement('p');
+  CartTotal.textContent = 'Total Amount - Rs.' + total;
+  checkout.append(CartTotal, chkoutBtn);
+
+  function displayElements(products) {
+    var cont = document.getElementById('container');
+    cont.innerHTML = '';
+    products.forEach(function (product) {
+      cont.append(createProductElemet(product));
+    });
+  }
+
+  function createProductElemet(product) {
+    var div = document.createElement('div');
+
+    var productImg = document.createElement('img');
+    productImg.src = product.image_url;
+
+    var productName = document.createElement('h3');
+    productName.textContent = product.name;
+
+    var productPrice = document.createElement('p');
+    productPrice.textContent = 'Rs.' + product.price;
+
+    var productRating = document.createElement('p');
+    productRating.textContent = 'Rating - ' + product.rating + '/5';
+
+    div.append(productImg, productName, productPrice, productRating);
+
+    return div;
+  }
+
+  function validateCoupon() {
+    var coupon = document.getElementById('couponText').value;
+
+    if (coupon == 'masai30') {
+      var discount = total * 0.3;
+
+      total = total - discount;
+      localStorage.setItem('cart_total', total);
+      CartTotal.textContent = 'Total Amount with Discount - Rs.' + total;
+    }
+  }
+</script>
